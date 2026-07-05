@@ -1,0 +1,32 @@
+name: Build executable
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build WandEnhancer
+        run: build.cmd
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: WandEnhancer-build
+          path: ./build-output/
