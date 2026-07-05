@@ -19,8 +19,10 @@ jobs:
       - name: Install pnpm
         run: npm install -g pnpm
 
-      - name: Install dependencies
-        run: pnpm install
+      - name: Install web panel dependencies
+        run: |
+          cd webpanel
+          pnpm install
 
       - name: Build WandEnhancer
         run: build.cmd
